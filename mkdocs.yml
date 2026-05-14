@@ -1,5 +1,5 @@
-site_name: 杨映淼的技术笔记
-site_description: AI Agent · Python · 技术学习笔记
+site_name: 技术笔记
+site_description: 技术学习笔记
 site_author: yangyinmiao
 site_url: https://yangyinmiao.github.io/my-notes/
 docs_dir: docs
