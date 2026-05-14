@@ -1,9 +1,9 @@
 # 私人笔记，不公开
-notes/daily.md
-notes/创业谈判准备.md
+docs/notes/daily.md
+docs/notes/创业谈判准备.md
 
 # 简历
-resume/
+docs/resume/
 
 # MkDocs 构建产物
 site/
