@@ -1,0 +1,197 @@
+
+/* ===== Custom Blog Styles ===== */
+
+/* ── GitHub Header Button ── */
+.md-header__github-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.28rem 0.72rem;
+  margin-right: 0.3rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.10);
+  color: var(--md-primary-bg-color) !important;
+  text-decoration: none !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  white-space: nowrap;
+}
+.md-header__github-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.7);
+  transform: translateY(-1px);
+}
+.md-header__github-btn svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+/* Hide text label on very small screens */
+@media screen and (max-width: 480px) {
+  .md-header__github-label { display: none; }
+  .md-header__github-btn { padding: 0.28rem 0.45rem; }
+}
+
+
+/* Hero homepage banner */
+.md-typeset .hero {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+.md-typeset .hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: white;
+}
+.md-typeset .hero p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Card grid for homepage */
+.md-typeset .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+.md-typeset .card {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.75rem;
+  padding: 1.4rem 1.2rem;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+}
+.md-typeset .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-color: var(--md-primary-fg-color);
+}
+.md-typeset .card-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+.md-typeset .card h3 { margin: 0 0 0.4rem; font-size: 1rem; font-weight: 600; }
+.md-typeset .card p { margin: 0; font-size: 0.85rem; opacity: 0.7; }
+
+/* Wider content area */
+.md-grid { max-width: 1400px; }
+
+/* Code block enhancements */
+.md-typeset pre > code { font-size: 0.82rem; }
+
+/* Smooth transitions */
+.md-main { transition: opacity 0.15s; }
+
+/* Tag pills */
+.md-typeset .tag {
+  display: inline-block;
+  background: var(--md-primary-fg-color--light);
+  color: var(--md-primary-bg-color);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.78rem;
+  margin: 0.1rem;
+  font-weight: 500;
+}
+
+/* ===== Resume Page Styles ===== */
+.resume-header {
+  background: var(--md-primary-fg-color--light, #e0f2f1);
+  border-left: 4px solid var(--md-primary-fg-color, #009688);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+[data-md-color-scheme="slate"] .resume-header {
+  background: rgba(0, 150, 136, 0.12);
+}
+
+.resume-meta {
+  font-size: 0.95rem;
+  color: var(--md-typeset-color);
+  margin-bottom: 0.5rem;
+}
+
+.resume-intent {
+  font-size: 0.95rem;
+}
+
+.date-tag {
+  font-size: 0.82rem;
+  color: var(--md-default-fg-color--light);
+  font-weight: normal;
+  margin-left: 0.5rem;
+}
+
+.resume-footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--md-default-fg-color--light);
+}
+
+/* ===== Resume Hero Header (v2) ===== */
+.resume-hero {
+  text-align: center;
+  padding: 1.8rem 1rem 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.resume-name {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--md-typeset-color);
+  line-height: 1.2;
+  margin-bottom: 0.55rem;
+}
+
+.resume-contact {
+  font-size: 0.92rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.resume-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.rtag {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rtag-primary {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color) !important;
+}
+
+.rtag-info {
+  background: var(--md-default-fg-color--lightest, #e8e8e8);
+  color: var(--md-typeset-color);
+  border: 1px solid var(--md-default-fg-color--lighter, #ccc);
+}
+
+[data-md-color-scheme="slate"] .rtag-info {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  color: var(--md-typeset-color);
+}
