@@ -44,13 +44,13 @@ Agent 应用
 | 02 | [提示词工程](./02-提示词工程.md) | 怎么写出好的 Prompt | ✅ 完整 |
 | 03 | [微调与 LoRA](./03-微调与LoRA.md) | 怎么让模型适配特定任务 | ✅ 完整 |
 | 04 | [RAG 技术](./04-RAG技术.md) | 怎么给模型接外部知识 | ✅ 完整 |
-| 05 | [Function Call](./05-FunctionCall.md) | 模型怎么调用外部函数 | 🚧 填充中 |
-| 06 | [MCP](./06-MCP.md) | 工具调用如何标准化 | 🚧 填充中 |
-| 07 | [Agent 框架](./07-Agent框架.md) | 有哪些主流框架、怎么选 | 🚧 填充中 |
-| 08 | [Multi-Agent](./08-Multi-Agent.md) | 多个 Agent 怎么协作 | 📝 待写 |
-| 09 | [Context Engineering](./09-Context-Engineering.md) | 上下文怎么管理和设计 | 📝 待写 |
-| 10 | [Agent Skill](./10-Agent-Skill.md) | Agent 能力怎么模块化 | 📝 待写 |
-| 11 | [Harness Engineering](./11-Harness-Engineering.md) | Agent 怎么评测和保障质量 | 📝 待写 |
+| 05 | [Function Call](./05-FunctionCall.md) | 模型怎么调用外部函数 | ✅ 完整 |
+| 06 | [MCP](./06-MCP.md) | 工具调用如何标准化 | ✅ 完整 |
+| 07 | [Agent 框架](./07-Agent框架.md) | 有哪些主流框架、怎么选 | ✅ 完整 |
+| 08 | [Multi-Agent](./08-Multi-Agent.md) | 多个 Agent 怎么协作 | ✅ 完整 |
+| 09 | [Context Engineering](./09-Context-Engineering.md) | 上下文怎么管理和设计 | ✅ 完整 |
+| 10 | [Agent Skill](./10-Agent-Skill.md) | Agent 能力怎么模块化 | ✅ 完整 |
+| 11 | [Harness Engineering](./11-Harness-Engineering.md) | Agent 怎么评测和保障质量 | ✅ 完整 |
 
 ---
 

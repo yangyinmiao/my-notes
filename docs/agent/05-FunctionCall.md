@@ -1,25 +1,147 @@
-# Function Call 技术
+# Function Call
 
-> 🚧 本笔记持续更新中
+> 目标：理解 Function Call 的工作原理、数据格式，以及如何在项目中使用。
 
-## 什么是 Function Call？
-Function Call 是一种技术，允许 AI Agent 在与用户交互时调用预定义的函数来执行特定任务。这些函数可以是任何编程语言中的函数，旨在扩展 AI Agent 的能力，使其能够处理更复杂的请求和任务。
+---
 
-## Function Call 的原理
-Function Call 的核心原理是将用户的自然语言输入转换为对特定函数的调用。这通常涉及以下步骤：
-- 
+## 一、是什么？
 
-## 实现细节
-实现 Function Call 需要以下几个关键组件：
-1. **函数定义**：开发者需要定义一组函数，这些函数可以执行特定的任务，如数据查询、计算、API 调用等。
-2. **函数注册**：将定义的函数注册到 AI Agent 中，使其能够识别并调用这些函数。
+**Function Call** 允许 LLM 在生成回复时，决定"我需要调用一个外部函数"，并输出结构化的调用参数，由开发者代码执行后将结果返回给模型。
 
-## 应用场景
-Function Call 技术可以应用于各种场景，如：
-- **智能助手**：AI Agent 可以通过 Function Call 调用日历函数来安排会议、提醒事项等。
-- **数据分析**：AI Agent 可以调用数据处理函数来分析数据、生成报告。
-- **自动化任务**：AI Agent 可以调用自动化脚本来执行重复性任务，如文件处理、系统维护等。
+**本质**：LLM 不能直接执行代码，它只是输出"我想调用什么函数、传什么参数"的 JSON，真正执行靠你的代码。
 
+---
 
+## 二、完整交互流程
 
-> 后续补充 Function Call 相关内容，包含原理、实现细节、应用场景等。
+```
+1. 开发者定义函数列表（工具描述）传给模型
+        ↓
+2. 用户发送消息
+        ↓
+3. 模型判断：需要调用工具？
+   ├── 否 → 直接生成文本回复，结束
+   └── 是 → 输出 tool_call（函数名 + 参数 JSON）
+        ↓
+4. 开发者代码执行该函数，获取结果
+        ↓
+5. 将函数结果作为 tool message 追加到对话
+        ↓
+6. 模型根据函数结果生成最终回复
+```
+
+---
+
+## 三、代码示例（OpenAI API）
+
+### 定义工具
+
+```python
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_expense_status",
+            "description": "查询报销单的审批状态",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "expense_id": {
+                        "type": "string",
+                        "description": "报销单 ID"
+                    }
+                },
+                "required": ["expense_id"]
+            }
+        }
+    }
+]
+```
+
+### 发起请求
+
+```python
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "帮我查一下 EXP-2024-001 的审批进度"}],
+    tools=tools,
+    tool_choice="auto"   # auto / none / required
+)
+```
+
+### 处理工具调用
+
+```python
+message = response.choices[0].message
+
+if message.tool_calls:
+    tool_call = message.tool_calls[0]
+    func_name = tool_call.function.name          # "get_expense_status"
+    func_args = json.loads(tool_call.function.arguments)  # {"expense_id": "EXP-2024-001"}
+
+    # 执行函数
+    result = get_expense_status(**func_args)
+
+    # 将结果追加回对话
+    messages.append(message)  # 模型的 tool_call 消息
+    messages.append({
+        "role": "tool",
+        "tool_call_id": tool_call.id,
+        "content": json.dumps(result, ensure_ascii=False)
+    })
+
+    # 再次请求，让模型生成最终回复
+    final_response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages
+    )
+```
+
+---
+
+## 四、tool_choice 参数
+
+| 值 | 含义 |
+|----|------|
+| `"auto"` | 模型自己决定要不要调用工具（默认） |
+| `"none"` | 禁止调用工具，强制生成文本 |
+| `"required"` | 必须调用工具 |
+| `{"type": "function", "function": {"name": "xxx"}}` | 强制调用指定函数 |
+
+---
+
+## 五、并行工具调用
+
+模型可以在一次回复中输出多个 tool_call，需要并行执行：
+
+```python
+if message.tool_calls:
+    for tool_call in message.tool_calls:
+        # 依次执行每个工具调用
+        result = dispatch_tool(tool_call.function.name,
+                               json.loads(tool_call.function.arguments))
+        messages.append({
+            "role": "tool",
+            "tool_call_id": tool_call.id,
+            "content": str(result)
+        })
+```
+
+---
+
+## 六、Function Call vs MCP
+
+| | Function Call | MCP |
+|--|--------------|-----|
+| **定义方式** | 在 API 请求里传 JSON schema | 通过标准协议注册到服务 |
+| **作用范围** | 单次 API 调用 | 跨应用、跨模型共享工具 |
+| **适用场景** | 业务逻辑中调用特定函数 | 工具标准化、多 Agent 共享 |
+
+> Function Call 是机制，MCP 是标准化协议。实际开发先用 Function Call，规模大了再考虑 MCP。
+
+---
+
+## 参考资料
+
+- [OpenAI Function Calling 文档](https://platform.openai.com/docs/guides/function-calling)
+- [OpenAI Cookbook - Function Calling](https://cookbook.openai.com/examples/how_to_call_functions_with_chat_models)

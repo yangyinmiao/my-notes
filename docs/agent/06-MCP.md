@@ -1,25 +1,125 @@
-# MCP 技术
+# MCP（Model Context Protocol）
 
-> 来源：[MCP 技术](https://www.notion.so/MCP-Model-Context-Protocol-9b1c8e5a0c7b4e5f9d2a1e8c3f6a7b)（Notion）
-> 本笔记持续更新中
+> 目标：理解 MCP 是什么、解决什么问题、架构如何、如何接入。
 
-## 概念
-MCP，Model Context Protocol, 是一种工具调用标准化协议，旨在规范 LLM 与外部工具之间的交互方式。通过 MCP，LLM 可以更高效地调用各种工具（如搜索引擎、数据库、API 等），从而增强其功能和应用范围。
+---
 
-## 原理
-MCP 定义了一套统一的接口和数据格式，使得 LLM 可以通过标准化的方式与工具进行通信。MCP 包括以下核心组件：
-- **工具注册**：工具提供者需要将工具注册到 MCP 中，定义工具的功能、输入输出格式等信息。
-- **工具调用**：LLM 根据用户输入和上下文，决定是否需要调用工具，并按照 MCP 定义的协议进行调用。
-- **结果处理**：工具执行完成后，结果会按照 MCP 定义的格式返回给 LLM，LLM 可以根据结果继续生成响应或进行下一步操作。
+## 一、是什么？
 
-## 实现细节
-MCP 的实现通常包括以下步骤：
-1. **工具定义**：开发者需要定义工具的功能、输入输出格式，并将工具注册到 MCP 中。
-2. **LLM 集成**：在 LLM 的生成过程中，集成 MCP 的工具调用逻辑，使得 LLM 可以根据需要调用工具。
-3. **结果处理**：处理工具返回的结果，并将其整合到 LLM 的响应中。
+**MCP** 是 Anthropic 提出的开放标准协议，定义了 LLM 与外部工具/数据源之间的统一通信方式。
 
-## 应用场景
-MCP 技术可以应用于各种场景，如：
-- **智能客服**：通过 MCP，客服机器人可以调用知识库、订单系统等工具，提供更准确和个性化的服务。
-- **数据分析**：LLM 可以通过 MCP 调用数据分析工具，帮助用户进行数据查询、分析和可视化。
-- **自动化办公**：通过 MCP，LLM 可以调用日历、邮件等工具，帮助用户进行日程安排、邮件处理等办公任务。
+**类比**：MCP 之于 AI 工具调用，就像 USB 之于外设——统一接口，插上就用，不用为每个设备单独写驱动。
+
+**解决的问题**：以前每个 AI 应用都要单独集成每个工具（N×M 的问题），MCP 让工具只需实现一次，所有支持 MCP 的 AI 应用都能用（N+M）。
+
+---
+
+## 二、架构
+
+```
+┌─────────────────────────────┐
+│        MCP Host             │  ← 你的 AI 应用（Claude Desktop / Cursor / 自研 Agent）
+│  ┌──────────────────────┐   │
+│  │    MCP Client        │   │  ← 内嵌在 Host 中，管理与 Server 的连接
+│  └──────────┬───────────┘   │
+└─────────────┼───────────────┘
+              │ MCP 协议（JSON-RPC over stdio / SSE）
+   ┌──────────┴──────────┐
+   │                     │
+┌──▼──────┐         ┌────▼────┐
+│MCP Server│         │MCP Server│  ← 每个 Server 暴露一组工具/资源
+│(文件系统)│         │(数据库)  │
+└─────────┘         └─────────┘
+```
+
+---
+
+## 三、核心概念
+
+| 概念 | 说明 |
+|------|------|
+| **Tools** | 模型可调用的函数，如"查询数据库"、"执行代码" |
+| **Resources** | 模型可读取的数据，如文件内容、API 响应 |
+| **Prompts** | 预定义的提示模板，由 Server 提供 |
+| **Sampling** | Server 请求 Host 执行 LLM 推理（反向调用） |
+
+---
+
+## 四、传输方式
+
+| 方式 | 适用场景 |
+|------|---------|
+| **stdio** | 本地工具，Server 作为子进程运行，最常用 |
+| **SSE（HTTP）** | 远程工具，支持跨网络部署 |
+
+---
+
+## 五、快速接入示例（Python SDK）
+
+### 实现一个 MCP Server
+
+```python
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+
+app = Server("expense-tools")
+
+@app.list_tools()
+async def list_tools() -> list[Tool]:
+    return [
+        Tool(
+            name="get_expense",
+            description="根据 ID 查询报销单详情",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "expense_id": {"type": "string"}
+                },
+                "required": ["expense_id"]
+            }
+        )
+    ]
+
+@app.call_tool()
+async def call_tool(name: str, arguments: dict):
+    if name == "get_expense":
+        result = db.query_expense(arguments["expense_id"])
+        return [TextContent(type="text", text=str(result))]
+
+async def main():
+    async with stdio_server() as (read, write):
+        await app.run(read, write, app.create_initialization_options())
+```
+
+### 在 Claude Desktop 中配置
+
+```json
+{
+  "mcpServers": {
+    "expense-tools": {
+      "command": "python",
+      "args": ["/path/to/server.py"]
+    }
+  }
+}
+```
+
+---
+
+## 六、MCP vs Function Call
+
+| | Function Call | MCP |
+|--|--------------|-----|
+| **标准化程度** | 各家 API 格式不同 | 统一开放标准 |
+| **工具复用** | 绑定在单个应用 | 跨应用共享 |
+| **工具发现** | 手动在代码里写 | Server 动态声明 |
+| **适用阶段** | 快速开发单个功能 | 工具生态规模化 |
+
+---
+
+## 参考资料
+
+- [MCP 官网](https://modelcontextprotocol.io/)
+- [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
+- [MCP Server 市场](https://github.com/modelcontextprotocol/servers)
