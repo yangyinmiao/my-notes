@@ -32,6 +32,12 @@ Agent 应用
   ├── 09 Context Engineering← 上下文管理与设计
   ├── 10 Agent Skill        ← Agent 能力模块化
   └── 11 Harness Engineering← Agent 评测与质量保障
+
+扩展知识
+  │
+  ├── 12 Embedding 与向量化  ← RAG 底层原理，模型选型与代码
+  ├── 13 结构化输出           ← JSON Mode / Pydantic，让输出可解析
+  └── 14 本地模型部署         ← Ollama / llama.cpp / vLLM，数据不出本地
 ```
 
 ---
@@ -51,6 +57,9 @@ Agent 应用
 | 09 | [Context Engineering](./09-Context-Engineering.md) | 上下文怎么管理和设计 | ✅ 完整 |
 | 10 | [Agent Skill](./10-Agent-Skill.md) | Agent 能力怎么模块化 | ✅ 完整 |
 | 11 | [Harness Engineering](./11-Harness-Engineering.md) | Agent 怎么评测和保障质量 | ✅ 完整 |
+| 12 | [Embedding 与向量化](./12-Embedding与向量化.md) | 向量化原理、模型选型、RAG 底层 | ✅ 完整 |
+| 13 | [结构化输出](./13-结构化输出.md) | JSON Mode / Pydantic，稳定输出结构化数据 | ✅ 完整 |
+| 14 | [本地模型部署](./14-本地模型部署.md) | Ollama / vLLM，数据不出本地 | ✅ 完整 |
 
 ---
 

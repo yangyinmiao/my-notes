@@ -116,6 +116,68 @@ result = executor.invoke({"input": "查一下 EXP-001 的状态"})
 | **上下文溢出** | 多轮工具调用累积太多 token | 截断历史或压缩中间步骤 |
 | **效果不稳定** | 规划受随机性影响 | 降低 temperature，用结构化输出 |
 
+## 六、LangGraph 核心概念
+
+LangGraph 是目前构建**复杂有状态 Agent** 的最佳选择，用"图"来表达 Agent 的执行流程。
+
+### 核心概念
+
+```
+State（状态）  ← 贯穿整个图的共享数据（TypedDict）
+Node（节点）   ← 每个处理步骤（函数）
+Edge（边）     ← 节点间的跳转，可以是条件判断
+```
+
+### 最小示例
+
+```python
+from langgraph.graph import StateGraph, END
+from typing import TypedDict
+
+class AgentState(TypedDict):
+    messages: list
+    tool_result: str
+
+def llm_node(state: AgentState) -> AgentState:
+    """调用 LLM 决定下一步"""
+    response = llm.invoke(state["messages"])
+    state["messages"].append(response)
+    return state
+
+def tool_node(state: AgentState) -> AgentState:
+    """执行工具调用"""
+    result = run_tool(state["messages"][-1].tool_calls[0])
+    state["tool_result"] = result
+    return state
+
+def should_use_tool(state: AgentState) -> str:
+    """条件边：判断是否需要工具"""
+    last_msg = state["messages"][-1]
+    if hasattr(last_msg, "tool_calls") and last_msg.tool_calls:
+        return "tool"
+    return "end"
+
+# 构建图
+graph = StateGraph(AgentState)
+graph.add_node("llm", llm_node)
+graph.add_node("tool", tool_node)
+graph.set_entry_point("llm")
+graph.add_conditional_edges("llm", should_use_tool, {"tool": "tool", "end": END})
+graph.add_edge("tool", "llm")   # 工具执行完回到 LLM
+
+app = graph.compile()
+result = app.invoke({"messages": [HumanMessage("帮我查 EXP-001 的状态")]})
+```
+
+### 与 AgentExecutor 的区别
+
+| | AgentExecutor | LangGraph |
+|--|--------------|-----------|
+| **流程控制** | 固定 ReAct 循环 | 完全自定义图结构 |
+| **状态管理** | 有限 | 丰富，可持久化 |
+| **调试** | 较难 | 可视化节点执行 |
+| **适合** | 简单 Agent | 复杂多步、有分支的 Agent |
+
 ---
 
 ## 参考资料
