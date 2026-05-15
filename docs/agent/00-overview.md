@@ -38,6 +38,7 @@ Agent 应用
   ├── 12 Embedding 与向量化  ← RAG 底层原理，模型选型与代码
   ├── 13 结构化输出           ← JSON Mode / Pydantic，让输出可解析
   └── 14 本地模型部署         ← Ollama / llama.cpp / vLLM，数据不出本地
+  └── 15 n8n / Coze / Dify   ← 三大 AI 应用平台选型对比
 ```
 
 ---
@@ -60,6 +61,7 @@ Agent 应用
 | 12 | [Embedding 与向量化](./12-Embedding与向量化.md) | 向量化原理、模型选型、RAG 底层 | ✅ 完整 |
 | 13 | [结构化输出](./13-结构化输出.md) | JSON Mode / Pydantic，稳定输出结构化数据 | ✅ 完整 |
 | 14 | [本地模型部署](./14-本地模型部署.md) | Ollama / vLLM，数据不出本地 | ✅ 完整 |
+| 15 | [n8n / Coze / Dify 对比](./15-n8n-Coze-Dify对比.md) | 三大 AI 应用平台选型指南 | ✅ 完整 |
 
 ---
 
