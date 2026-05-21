@@ -65,28 +65,28 @@ nav:
   - AI Agent:
     - agent/index.md
     - 大模型基础:
-      - LLM 基础: agent/foundations/llm基础.md
-      - Embedding 与向量化: agent/foundations/embedding.md
-      - 提示词工程: agent/foundations/提示词工程.md
-      - 结构化输出: agent/foundations/结构化输出.md
-      - 微调与 LoRA: agent/foundations/微调与LoRA.md
+      - LLM 基础: agent/00-foundations/llm基础.md
+      - Embedding 与向量化: agent/00-foundations/embedding.md
+      - 提示词工程: agent/00-foundations/提示词工程.md
+      - 结构化输出: agent/00-foundations/结构化输出.md
+      - 微调与 LoRA: agent/00-foundations/微调与LoRA.md
     - Agent 核心技术:
-      - Function Call: agent/core/function-call.md
-      - MCP: agent/core/mcp.md
-      - RAG 技术: agent/core/rag.md
-      - Context Engineering: agent/core/context-engineering.md
-      - Agent 框架: agent/core/agent框架.md
-      - Multi-Agent: agent/core/multi-agent.md
-      - Agent Skill: agent/core/agent-skill.md
+      - Function Call: agent/01-core/function-call.md
+      - MCP: agent/01-core/mcp.md
+      - RAG 技术: agent/01-core/rag.md
+      - Context Engineering: agent/01-core/context-engineering.md
+      - Agent 框架: agent/01-core/agent框架.md
+      - Multi-Agent: agent/01-core/multi-agent.md
+      - Agent Skill: agent/01-core/agent-skill.md
     - 工程实践:
-      - 本地模型部署: agent/engineering/本地模型部署.md
-      - n8n / Coze / Dify 对比: agent/engineering/n8n-coze-dify.md
-      - Vibe Coding 技巧: agent/engineering/vibe-coding.md
+      - 本地模型部署: agent/02-engineering/本地模型部署.md
+      - n8n / Coze / Dify 对比: agent/02-engineering/n8n-coze-dify.md
+      - Vibe Coding 技巧: agent/02-engineering/vibe-coding.md
     - 评估体系:
-      - Harness Engineering: agent/evaluation/harness-engineering.md
-      - Agent 性能评估: agent/evaluation/agent性能评估.md
+      - Harness Engineering: agent/03-evaluation/harness-engineering.md
+      - Agent 性能评估: agent/03-evaluation/agent性能评估.md
     - 学习资源:
-      - 论文: agent/resources/论文.md
+      - 论文: agent/04-resources/论文.md
   - 面试:
     - interview/00-overview.md
     - AI Agent 面试题: interview/01-AI-Agent面试题.md
