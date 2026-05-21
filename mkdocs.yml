@@ -60,6 +60,44 @@ plugins:
       lang: zh
   - glightbox
 
+nav:
+  - 首页: index.md
+  - AI Agent:
+    - agent/index.md
+    - 大模型基础:
+      - LLM 基础: agent/foundations/llm基础.md
+      - Embedding 与向量化: agent/foundations/embedding.md
+      - 提示词工程: agent/foundations/提示词工程.md
+      - 结构化输出: agent/foundations/结构化输出.md
+      - 微调与 LoRA: agent/foundations/微调与LoRA.md
+    - Agent 核心技术:
+      - Function Call: agent/core/function-call.md
+      - MCP: agent/core/mcp.md
+      - RAG 技术: agent/core/rag.md
+      - Context Engineering: agent/core/context-engineering.md
+      - Agent 框架: agent/core/agent框架.md
+      - Multi-Agent: agent/core/multi-agent.md
+      - Agent Skill: agent/core/agent-skill.md
+    - 工程实践:
+      - 本地模型部署: agent/engineering/本地模型部署.md
+      - n8n / Coze / Dify 对比: agent/engineering/n8n-coze-dify.md
+      - Vibe Coding 技巧: agent/engineering/vibe-coding.md
+    - 评估体系:
+      - Harness Engineering: agent/evaluation/harness-engineering.md
+      - Agent 性能评估: agent/evaluation/agent性能评估.md
+    - 学习资源:
+      - 论文: agent/resources/论文.md
+  - 面试:
+    - interview/00-overview.md
+    - AI Agent 面试题: interview/01-AI-Agent面试题.md
+    - 面试技巧: interview/02-面试技巧.md
+  - 开发:
+    - Python 基础: dev/python-basics.md
+    - Python 并发: dev/python-concurrent.md
+  - C 语言:
+    - 指针: c-lang/pointers.md
+  - 书籍推荐: 书籍推荐/intro.md
+
 markdown_extensions:
   - abbr
   - admonition
