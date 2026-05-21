@@ -64,12 +64,6 @@ nav:
   - 首页: index.md
   - AI Agent:
     - agent/index.md
-    - 大模型基础:
-      - LLM 基础: agent/00-foundations/00-llm基础.md
-      - Embedding 与向量化: agent/00-foundations/01-embedding.md
-      - 提示词工程: agent/00-foundations/02-提示词工程.md
-      - 结构化输出: agent/00-foundations/03-结构化输出.md
-      - 微调与 LoRA: agent/00-foundations/04-微调与LoRA.md
     - Agent 核心技术:
       - Function Call: agent/01-core/00-function-call.md
       - MCP: agent/01-core/01-mcp.md
@@ -78,13 +72,26 @@ nav:
       - Agent 框架: agent/01-core/04-agent框架.md
       - Multi-Agent: agent/01-core/05-multi-agent.md
       - Agent Skill: agent/01-core/06-agent-skill.md
+      - 记忆系统: agent/01-core/07-记忆系统.md
+      - 规划策略: agent/01-core/08-规划策略.md
+      - 安全与 Guardrails: agent/01-core/09-安全与Guardrails.md
+    - 大模型基础:
+      - LLM 基础: agent/00-foundations/00-llm基础.md
+      - Embedding 与向量化: agent/00-foundations/01-embedding.md
+      - 提示词工程: agent/00-foundations/02-提示词工程.md
+      - 结构化输出: agent/00-foundations/03-结构化输出.md
+      - 微调与 LoRA: agent/00-foundations/04-微调与LoRA.md
+      - Tokenization: agent/00-foundations/05-Tokenization.md
     - 工程实践:
       - 本地模型部署: agent/02-engineering/00-本地模型部署.md
       - n8n / Coze / Dify 对比: agent/02-engineering/01-n8n-coze-dify.md
       - Vibe Coding 技巧: agent/02-engineering/02-vibe-coding.md
+      - 可观测性: agent/02-engineering/03-可观测性.md
+      - Prompt 版本管理: agent/02-engineering/04-Prompt版本管理.md
     - 评估体系:
       - Harness Engineering: agent/03-evaluation/00-harness-engineering.md
       - Agent 性能评估: agent/03-evaluation/01-agent性能评估.md
+      - LLM-as-Judge: agent/03-evaluation/02-LLM-as-Judge.md
     - 学习资源:
       - 论文: agent/04-resources/00-论文.md
   - 面试:
