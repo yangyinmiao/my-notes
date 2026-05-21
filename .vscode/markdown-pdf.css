@@ -1,0 +1,16 @@
+/* Markdown PDF: avoid headings dangling at page end */
+h2, h3 {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+/* Keep short blocks together with their headings when possible */
+h2 + p,
+h2 + ul,
+h2 + ol,
+h3 + p,
+h3 + ul,
+h3 + ol {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
