@@ -14,3 +14,22 @@ h3 + ol {
   break-inside: avoid;
   page-break-inside: avoid;
 }
+
+/* Core skills table: keep the first column on one line and align row height */
+table td:first-child,
+table th:first-child {
+  white-space: nowrap;
+  width: 90px;
+}
+
+table td,
+table th {
+  line-height: 1.5;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  vertical-align: middle;
+}
+
+table tr {
+  height: 48px;
+}
