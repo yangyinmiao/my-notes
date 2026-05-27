@@ -95,21 +95,19 @@ description: AI Agent 开发工程师 / Python 后端工程师
 
 ## 项目经历
 
-### 中小企业财务报销 Agent 系统
+### 模拟面试 Agent 平台
 
-> 深圳智联云科 · 2026.01 - 至今 · 独立全栈开发
+> 个人项目 · 2026.05 · 独立开发
 
-**项目描述：** 面向 500 人规模中小企业，从零设计并交付完整财务报销 Agent 系统，覆盖发票识别、规则校验、多角色审批、AI 异常检测与对话式查询，可作为 SaaS 产品演示。
+**项目描述：** 从零构建多租户 AI 模拟面试平台，基于 LangGraph 多 Agent 架构驱动完整面试流程，支持简历/JD 解析、题库向量检索、4 种面试模式与自动评估报告生成。
 
 **核心工作：**
 
-- **发票 OCR 识别**：集成 GPT-4o Vision，自动提取发票关键字段，支持图片与 PDF 批量上传并发处理
-- **规则校验引擎**：按报销类别配置单次上限（餐饮 2000 元、办公用品 20000 元等），违规自动拦截，规则可热更新
-- **多角色审批流程**：设计 RBAC 四角色（员工 / 主管 / 财务 / 管理员），审批时间轴可追溯
-- **AI 异常检测**：自动标记重复发票、超额申请、可疑供应商，辅助审计
-- **LangChain Agent**：封装 6 个业务工具，支持自然语言查询报销数据、审批状态、统计报表
-- **报表分析**：月度趋势、类别分布、部门对比可视化图表，支持数据导出
-- **技术栈**：FastAPI · PostgreSQL · LangChain · React 18 · TypeScript · Docker
+- **LangGraph 多 Agent 编排**：6 个独立 Agent（简历分析 / JD 解析 / 题库检索 / 面试官 / 评估 / 监督路由），通过 StateGraph 有向图编排面试全流程，支持追问链、条件路由与状态持久化
+- **异步文档处理管线**：上传即返回 + Celery 异步 Embedding，PDF/Word/Markdown 多格式解析，嵌入 Qdrant 向量数据库
+- **多模式面试引擎**：实现基础 / 深度追问 / 追问链 / 压力面 4 种模式，LLM 根据 JD 匹配度与回答质量动态调整问题难度
+- **全栈工程实践**：FastAPI + PostgreSQL + SQLAlchemy 2.0 async 后端，Next.js 14 前端，Docker Compose 一键部署，JWT 多租户认证隔离
+- **技术栈**：Python · FastAPI · LangGraph · LangChain · PostgreSQL · Qdrant · MinIO · Celery · Next.js · Docker
 
 ---
 
