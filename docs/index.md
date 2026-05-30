@@ -21,20 +21,10 @@
 <h3>C 语言</h3>
 <p>指针、内存管理、系统编程</p>
 </a>
-<a class="card" href="interview/00-overview/">
-<div class="card-icon">🎯</div>
-<h3>面试准备</h3>
-<p>AI Agent 方向高频考点</p>
-</a>
 <a class="card" href="notes/daily/">
 <div class="card-icon">📝</div>
 <h3>日常笔记</h3>
 <p>碎片记录、读书笔记</p>
-</a>
-<a class="card" href="resume/">
-<div class="card-icon">📋</div>
-<h3>个人简历</h3>
-<p>AI Agent 开发工程师方向</p>
 </a>
 </div>
 
@@ -45,4 +35,3 @@
 | [Python 基础速查](dev/python-basics.md) | 开发 | ✅ 完成 |
 | [Agent 入门介绍](agent/00-intro.md) | Agent | 🚧 进行中 |
 | [指针与内存](c-lang/pointers.md) | C 语言 | ✅ 完成 |
-| [个人简历](resume/index.md) | 简历 | ✅ 最新 |
