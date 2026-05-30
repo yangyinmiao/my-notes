@@ -51,13 +51,20 @@ theme:
 
 extra:
   generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yangyinmiao
+      name: GitHub
 
 extra_css:
   - assets/extra.css
 
 plugins:
   - search:
-      lang: zh
+      lang: 
+        - zh
+        - en
+      separator: '[\s\-\.]+'
   - glightbox
 
 nav:
@@ -94,10 +101,6 @@ nav:
       - LLM-as-Judge: agent/03-evaluation/02-LLM-as-Judge.md
     - 学习资源:
       - 论文: agent/04-resources/00-论文.md
-  - 面试:
-    - interview/00-overview.md
-    - AI Agent 面试题: interview/01-AI-Agent面试题.md
-    - 面试技巧: interview/02-面试技巧.md
   - 开发:
     - Python 基础: dev/python-basics.md
     - Python 并发: dev/python-concurrent.md
