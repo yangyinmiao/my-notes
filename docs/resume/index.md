@@ -26,7 +26,7 @@ description: AI Agent 开发工程师 / Python 后端工程师
 				</tr>
 				<tr>
 					<td style="border: none;">邮箱：yang_yinmiao@outlook.com</td>
-					<td style="border: none;">到岗时间：随时入职</td>
+					<td style="border: none;">到岗时间：一周内</td>
 				</tr>
 				<tr>
 					<td style="border: none;">所在地：武汉</td>
@@ -52,7 +52,7 @@ description: AI Agent 开发工程师 / Python 后端工程师
 | 方向 | 技能详情 |
 |------|---------|
 | **LLM 应用** | Prompt Engineering（Few-shot / CoT / ReAct）、RAG 全流程（文档解析 → Chunking → Embedding → 混合检索 → Rerank）、Agent 架构设计（Tools / Memory / Workflow） |
-| **框架与工具** | LangChain · LangGraph · Chroma · n8n（工作流编排）· Coze · Dify · OpenAI / 通义千问 API |
+| **框架与工具** | LangChain · LangGraph · Chroma · N8N· Coze · Dify · OpenAI / 通义千问 API |
 | **AI 工程化** | 模型效果评估（准确率 / 召回率 / 端到端测试）、LangFuse 可观测性、向量数据库选型 |
 | **编程语言** | Python（主力）· C/C++（4 年+）· Shell · Perl |
 | **云与运维** | Docker（熟练）· Kubernetes（了解）· Linux 生产环境运维 |
@@ -106,8 +106,9 @@ description: AI Agent 开发工程师 / Python 后端工程师
 - **LangGraph 多 Agent 编排**：6 个独立 Agent（简历分析 / JD 解析 / 题库检索 / 面试官 / 评估 / 监督路由），通过 StateGraph 有向图编排面试全流程，支持追问链、条件路由与状态持久化
 - **异步文档处理管线**：上传即返回 + Celery 异步 Embedding，PDF/Word/Markdown 多格式解析，嵌入 Qdrant 向量数据库
 - **多模式面试引擎**：实现基础 / 深度追问 / 追问链 / 压力面 4 种模式，LLM 根据 JD 匹配度与回答质量动态调整问题难度
+- **LLM 可观测性**：集成 LangFuse 自部署方案，通过 LangChain CallbackHandler 实现 LLM 调用全链路追踪，按面试 session 分组，支持 token 消耗与成本分析
 - **全栈工程实践**：FastAPI + PostgreSQL + SQLAlchemy 2.0 async 后端，Next.js 14 前端，Docker Compose 一键部署，JWT 多租户认证隔离
-- **技术栈**：Python · FastAPI · LangGraph · LangChain · PostgreSQL · Qdrant · MinIO · Celery · Next.js · Docker
+- **技术栈**：FastAPI · LangGraph · LangChain · PostgreSQL · Qdrant · MinIO · Celery · Next.js · Docker
 
 ---
 
