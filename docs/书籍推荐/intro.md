@@ -31,48 +31,10 @@
 4. 具备一定的英文论文的撰写能力
 
 ### 编译原理
+>>>  TODO：待补充
 
+## 网络安全类
 
+- HTTPS
+- PKI
 
-
-
-```mermaid
-graph LR
-    A[用户输入] --> B[LLM 规划]
-    B --> C{需要工具?}
-    C -- 是 --> D[调用工具]
-    D --> B
-    C -- 否 --> E[输出结果]
-```
-
-## 核心组件
-
-- **LLM** — 大脑（GPT-4o / Claude / Llama3）
-- **Memory** — 短期（上下文）+ 长期（向量数据库）
-- **Tools** — 搜索、代码执行、API 调用
-- **Planning** — ReAct / CoT / Tree-of-Thought
-
-## RAG 架构
-
-```mermaid
-graph TD
-    Docs[文档/笔记] --> Chunk[分块 Chunk]
-    Chunk --> Embed[向量化 Embedding]
-    Embed --> VDB[(Chroma 向量数据库)]
-    Query[用户查询] --> Embed2[向量化]
-    Embed2 --> VDB
-    VDB --> Context[相关上下文]
-    Context --> LLM[LLM 生成回答]
-```
-
-## 技术栈选择
-
-| 组件 | 选型 |
-|------|------|
-| 向量数据库 | **Chroma** |
-| Embedding | sentence-transformers |
-| LLM 框架 | LangChain / LlamaIndex |
-| 本地推理 | llama.cpp / Ollama |
-
-!!! warning "注意"
-    向量数据库选型请根据数据量决定，小项目首选 **Chroma**，生产环境可考虑 Weaviate / Qdrant。
